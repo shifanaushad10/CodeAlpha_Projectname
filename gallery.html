@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Image Gallery</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Vietnam-Image Gallery</h1>
+  <div class="filters">
+  <button onclick="filterImages('all')">All</button>
+  <button onclick="filterImages('nature')">Nature</button>
+  <button onclick="filterImages('city')">City</button>
+</div>
+
+  <div class="gallery">
+    <img src="images/Ba Na Hills.jpg" alt="Ba Na Hills" class="thumb"  data-category="city">
+    <img src="images/Coconut Village.jpg" alt="Coconut Village" class="thumb"  data-category="nature">
+    <img src="images/Golden Bridge.jpg" alt="Golden Bridge" class="thumb"  data-category="nature">
+    <img src="images/Ho Chi Min City.jpg" alt="Ho Chi Min City" class="thumb"  data-category="city">
+    <img src="images/cafe apartment.jpg" alt="Cafe Apartment" class="thumb"  data-category="city">
+    <img src="images/Hochimin Bus tour.jpg" alt="Hochimin Bus tour" class="thumb"  data-category="city">
+    <img src="images/Hoi an.jpg" alt="Hoi an" class="thumb"  data-category="nature">
+    <img src="images/lotus-season-ninh-binh.jpg" alt="Lotus season ninh binh" class="thumb"  data-category="nature">
+    <img src="images/ninh binh.jpg" alt="Ninh Binh" class="thumb"  data-category="nature">
+    <img src="images/Saigon_Central_Post_Office.jpg" alt="Saigon Central Post Office" class="thumb"  data-category="city">
+    <img src="images/Train Street.jpg" alt="Train Street" class="thumb" data-category="city">
+    <img src="images/Ba Na Hills Budha statue.jpg" alt="Budha Statue" class="thumb" data-category="nature">
+    <img src="images/Temple of Literature.jpg" alt="Temple of Literature" class="thumb" data-category="nature">
+    <img src="images/Grand-World-Phu-Quoc.jpg" alt="Grand World Phu Quoc" class="thumb" data-category="city">
+    <img src="images/Sapa.jpg" alt="Sapa" class="thumb" data-category="nature">
+
+
+
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <span class="close" onclick="closeLightbox()">×</span>
+    <img class="lightbox-image" id="lightbox-image" src="">
+    <p class="caption" id="lightbox-caption"></p>
+
+    <div class="navigation">
+      <button onclick="prevImage()">⟨ Prev</button>
+      <button onclick="nextImage()">Next ⟩</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

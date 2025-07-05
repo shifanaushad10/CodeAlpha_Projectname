@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Basic Calculator</title>
+  <style>
+    body.dark {
+  background-color: #121212;
+  color: white;
+}
+
+body.dark .calculator {
+  background-color: #1e1e1e;
+  box-shadow: 0 0 20px rgba(255,255,255,0.1);
+}
+
+body.dark #display {
+  background-color: #222;
+  color: #00e676;
+}
+
+body.dark button {
+  background-color: #333;
+  color: #fff;
+}
+
+body.dark button:hover {
+  background-color: #444;
+}
+
+#themeToggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  background-color: #222;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f1f1f1;
+    font-family: Arial, sans-serif;
+  }
+
+  .calculator {
+    width: 300px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+
+  #display {
+    height: 60px;
+    background-color: #000;
+    color: #00ff99;
+    font-size: 2em;
+    text-align: right;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+  }
+
+  .buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+
+  button {
+    font-size: 1.4em;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    background-color: #e0e0e0;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  button:hover {
+    background-color: #d1d1d1;
+  }
+
+  button:active {
+    background-color: #ccc;
+  }
+
+  button:nth-child(4n) {
+    background-color: #ff9800;
+    color: white;
+  }
+
+  button:nth-last-child(1) {
+    background-color: #4caf50;
+    color: white;
+  }
+
+  button:nth-child(1) {
+    background-color: #f44336;
+    color: white;
+  }
+</style>
+
+</head>
+<body>
+
+    <button onclick="toggleTheme()" id="themeToggle">🌙 Dark Mode</button>
+
+  <div class="calculator">
+    <div id="display">0</div>
+    <div class="buttons">
+            
+      <!-- First Row -->
+    <button onclick="clearDisplay()">C</button>
+    <button onclick="append('/')">/</button>
+    <button onclick="append('*')">*</button>
+    <button onclick="append('-')">-</button>
+
+<!-- Second Row -->
+    <button onclick="append('7')">7</button>
+    <button onclick="append('8')">8</button>
+    <button onclick="append('9')">9</button>
+    <button onclick="append('+')">+</button>
+
+<!-- Third Row -->
+    <button onclick="append('4')">4</button>
+    <button onclick="append('5')">5</button>
+    <button onclick="append('6')">6</button>
+    <button onclick="backspace()">⌫</button>
+
+<!-- Fourth Row -->
+    <button onclick="append('1')">1</button>
+    <button onclick="append('2')">2</button>
+    <button onclick="append('3')">3</button>
+    <button onclick="append('.')">.</button>
+
+<!-- Fifth Row -->
+    <button onclick="append('0')">0</button>
+    <button onclick="calculate()">=</button>
+    </div>
+  </div>
+<audio id="clickSound" src="click-sound.mp3" preload="auto"></audio>
+
+  <script>
+  let input = ''; 
+  const display = document.getElementById('display'); 
+
+  function updateDisplay() {
+    display.textContent = input || '0';
+  }
+
+  function append(value) {
+    input += value;
+    updateDisplay();
+  }
+
+  function clearDisplay() {
+    input = '';
+    updateDisplay();
+  }
+  function backspace() {
+  input = input.slice(0, -1); 
+  updateDisplay();
+  playClickSound();            
+}
+
+  
+  function calculate() {
+    try {
+      input = eval(input).toString(); 
+    } catch (error) {
+      input = 'Error';
+    }
+    updateDisplay();
+  }
+
+  
+  document.addEventListener('keydown', function(e) {
+    const key = e.key;
+    if ((key >= '0' && key <= '9') || '+-*/.'.includes(key)) {
+      append(key);
+    } else if (key === 'Enter' || key === '=') {
+      calculate();
+    } else if (key === 'Backspace') {
+      input = input.slice(0, -1); 
+      updateDisplay();
+    } else if (key.toLowerCase() === 'c') {
+      clearDisplay();
+    }
+  });
+  function toggleTheme() {
+  document.body.classList.toggle('dark');
+  const btn = document.getElementById('themeToggle');
+  btn.textContent = document.body.classList.contains('dark') ? '☀️ Light Mode' : '🌙 Dark Mode';
+}
+function playClickSound() {
+  const sound = document.getElementById('clickSound');
+  if (sound) {
+    sound.currentTime = 0; 
+    sound.play().catch(error => {
+      console.warn('Sound failed to play:', error);
+    });
+  }
+}
+
+function append(value) {
+  playClickSound();
+  input += value;
+  updateDisplay();
+}
+function clearDisplay() {
+  playClickSound();
+  input = '';
+  updateDisplay();
+}
+function calculate() {
+  playClickSound();
+  try {
+    input = eval(input).toString();
+  } catch (e) {
+    input = 'Error';
+  }
+  updateDisplay();
+}
+
+
+</script>
+
+</body>
+</html>
